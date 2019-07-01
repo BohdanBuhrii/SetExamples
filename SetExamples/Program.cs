@@ -12,8 +12,7 @@ namespace SetExamples
                 Console.Write(a.ToString() + "  ");
             }
         }
-
-
+        
 
         public static void IntSortedSetExample()
         {
@@ -42,21 +41,56 @@ namespace SetExamples
 
         }
 
+
+        public static Person ReadPerson()
+        {
+            Person person = new Person();
+            Console.Write("Id : ");
+            person.Id = Convert.ToInt32(Console.ReadLine());
+
+            Console.Write("Name : ");
+            person.Name = Console.ReadLine();
+
+            Console.Write("BirthDate : ");
+            person.BirthDate = Convert.ToDateTime(Console.ReadLine());
+
+            return person;
+        }
+
+
         public static void PersonSortedSetExample()
         {
+            SortedSet<Person> set = new SortedSet<Person>();
 
+            Console.Write("Enter set lenth : ");
+
+            int lenth = Convert.ToInt32(Console.ReadLine());
+
+            Console.WriteLine("Enter people :");
+
+            for (int i = 0; i < lenth; i++)
+            {
+                Console.Write("Next person :\n");
+
+                if (!set.Add(ReadPerson()))
+                {
+                    Console.WriteLine("Set already contains this element");
+                    i--;
+                }
+
+                Console.Write("\nSet : ");
+                ShowSet<Person>(set);
+                Console.WriteLine("\n");
+            }
         }
 
 
         static void Main(string[] args)
         {
-            //SortedSet<Person> set = new SortedSet<Person>(new PersonComparer());
-
-            //set.Add(new Person { Name = "gogo", Id = 1 });
-            //set.Add(new Person { Name = "gugu", Id = 2 });
-
-
+            
             IntSortedSetExample();
+
+            PersonSortedSetExample();
 
         }
     }
